@@ -15,11 +15,22 @@ numeric_subgroups(Y, X, grouping_col, preds, max_groups = 10)
 
 \item{preds}{vector of predictions}
 
-\item{max_groups}{number of groups to create}
+\item{max_groups}{number of groups to create (default 10)}
 }
 \value{
-A vector of subgroup assignment
+A vector specifying subgroup assignment, of the same length as Y.
+Usually, the values in the vector will be intervals specifying how the numeric variable
+was split. In the case of many observations with the exact same value, the formed subgroups
+may instead be labeled as "mode" and "not mode".
 }
 \description{
-Divide observations into groups based on a single numeric variable
+\code{numeric_subgroups} attempts to divide the observations into
+evenly sized groups based on \verb{grouping col}. In some cases, there are too
+many observations with the same value. This can happen if the variable in question
+was 0 for a large number of observations, or if many of the observations
+were originally missing and were replaced with mean-imputed values. In this case,
+\code{numeric_subgroups} will create one subgroup of all observations with the
+most frequent value and attempt to divide the remaining observations into evenly sized groups.
+If the percentage of observations with the same value was extreme, observations will
+be divided into two subgroups: those with the most frequent value and those with any other value.
 }
