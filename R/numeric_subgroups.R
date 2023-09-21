@@ -1,5 +1,5 @@
 
-
+#testing something
 #' Divide observations into groups based on a single numeric variable
 #'
 #' @param Y vector of responses
