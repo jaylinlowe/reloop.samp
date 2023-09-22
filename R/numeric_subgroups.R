@@ -12,7 +12,7 @@
 #' be divided into two subgroups: those with the most frequent value and those with any other value.
 #'
 #' @param Y vector of responses
-#' @param X a matrix or dataframe of covariates
+#' @param X a matrix or data frame of covariates
 #' @param grouping_col A column in X, used to divide observations into subgroups
 #' @param preds vector of predictions
 #' @param max_groups number of groups to create (default 10)

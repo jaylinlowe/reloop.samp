@@ -1,38 +1,5 @@
 
 
-#' Mean Imputation
-#' @description
-#' Replaces all missing values with the mean of the column and creates new
-#' columns to capture what values were initially missing.
-#'
-#'
-#' @param df data frame to modify
-#'
-#' @return `mean_imputation` returns the original data frame, modified so that all missing values are
-#' have been replaced with the mean of the column. All columns with missing values
-#' now have an additional corresponding column with `_mis` tagged onto
-#' the original column name. The new columns will have a 1 in any row where there
-#' was originally a missing value in the corresponding column and a 0 otherwise.
-#' @export
-#'
-mean_imputation <- function(df) {
-  df_new <- df %>%
-    mutate(across(where(is.numeric), ~case_when(is.na(.x) ~ 1,
-                                                TRUE ~ 0),
-                  .names = "{.col}_mis")) %>%
-    mutate(across(where(is.numeric), ~case_when(is.na(.x) ~ mean(.x, na.rm = TRUE),
-                                                TRUE ~ .x)))
-
-  #get table count of NAs per column, then pull any names with 0 and remove those columns
-  na_count_df <- df_new %>% summarise(across(ends_with("_mis"), ~ sum(is.na(.))))
-
-  cols_to_remove <- colnames(na_count_df)[which(na_count_df == 0)]
-  df_new <- df_new %>%
-    select(-all_of(cols_to_remove))
-
-  return(df_new)
-}
-
 #' Calculating the mode for a specified column of a data frame
 #'
 #' @param df a data frame to analyze
@@ -40,10 +7,40 @@ mean_imputation <- function(df) {
 #'
 #' @return The value that appears most frequently in the `var` column of `df`
 #' @export
-#'
+#' @noRd
 mode_calc <- function(df, col) {
   index <- which(colnames(df) == col)
   v <- df[, index]
   uniqv <- unique(v)
   return(uniqv[which.max(tabulate(match(v, uniqv)))])
+}
+
+#' Get vector of variable names
+#'
+#' @description
+#' An easy way to get the correct variable names depending on the Shiny inputs.
+#' If "All Variables" is the input, all column names are returned. The function
+#' also returns an error if `variables` is a list including variable names and
+#' "All Variables".
+#'
+#'
+#' @param variables user specified input from Shiny function of what variables to select
+#' @param X data frame of covariates
+#'
+#' @return A vector of variable names
+#' @export
+#' @noRd
+get_var_names <- function(variables, X) {
+  if (length(variables) == 1) {
+    if (variables == "All Variables") {
+      variables <- colnames(X)
+    }
+  }
+
+  if (length(variables) > 1) {
+    if ("All Variables" %in% variables) {
+      stop("If 'All Variables' is selected, no other columns should be selected")
+    }
+  }
+  return(variables)
 }

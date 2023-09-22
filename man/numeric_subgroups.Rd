@@ -9,7 +9,7 @@ numeric_subgroups(Y, X, grouping_col, preds, max_groups = 10)
 \arguments{
 \item{Y}{vector of responses}
 
-\item{X}{a matrix or dataframe of covariates}
+\item{X}{a matrix or data frame of covariates}
 
 \item{grouping_col}{A column in X, used to divide observations into subgroups}
 
