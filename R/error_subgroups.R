@@ -8,7 +8,6 @@
 #' forest.
 #'
 #'
-#'
 #' @param Y a vector of responses
 #' @param X a matrix or data frame of covariates
 #' @param preds a vector of predicted values
@@ -21,7 +20,7 @@
 #'
 #' @export
 #'
-error_subgroups <- function(Y, X, preds, variables = NULL, num_groups) {
+error_subgroups <- function(Y, X, preds, variables = NULL, num_groups = 10) {
   if (!is.null(variables)) {
     if (sum(variables %in% colnames(X)) != length(variables)) {
       stop("variables must be a list of column names in X")

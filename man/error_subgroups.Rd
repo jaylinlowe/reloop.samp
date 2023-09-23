@@ -4,7 +4,7 @@
 \alias{error_subgroups}
 \title{Divide observations into groups based on OOB predicted error of original residuals}
 \usage{
-error_subgroups(Y, X, preds, variables = NULL, num_groups)
+error_subgroups(Y, X, preds, variables = NULL, num_groups = 10)
 }
 \arguments{
 \item{Y}{a vector of responses}

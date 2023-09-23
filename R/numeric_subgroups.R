@@ -42,7 +42,7 @@ numeric_subgroups <- function(Y, X, grouping_col, preds, max_groups = 10) {
     df$subgroups <- cut_number(df[[grouping_col]], max_groups)
     df_mod <- df},
     error = function(e) {
-      sub_mode <- my_mode(df, grouping_col)
+      sub_mode <- mode_calc(df, grouping_col)
       df$is_mode <- ifelse(df[[grouping_col]] == sub_mode, 1, 0)
       df_not_mode <- filter(df, is_mode == 0)
 
