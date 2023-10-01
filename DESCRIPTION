@@ -1,5 +1,5 @@
 Package: reloop.samp
-Title: 
+Title: Sample Size Calculations for RCTs with ReLOOP
 Version: 0.0.0.9000
 Authors@R: 
     person("Jaylin", "Lowe", , "jaylincl@umich.edu", role = c("aut", "cre"))
