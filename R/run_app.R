@@ -1,11 +1,18 @@
 #' Create interactive Shiny app to calculate sample sizes using reloop
 #'
-#' @details SOMETHING HERE???
+#' @details `run_app` uses other `reloop.samp` functions to display a Shiny app that walks users
+#' through the process of defining subgroups and calculating the sample size that would be
+#' necessary if the RCT population resembled each subgroup. Sample sizes for each subgroup
+#' without using ReLOOP are also displayed. Additionally, users can explore diagnostics
+#' of the initial random forest results and can compare each subgroup to the rest of the
+#' remnant for any covariate.
+#'
 #'
 #' @param ...
 #'
 #' @export
 #'
+#'#caret, randomForest, shiny, shinydashboard, shinyalert, scales (for the muted function)
 run_app <- function(...) {
   ui <- dashboardPage(skin = "purple",
                       dashboardHeader(title = "Sample Size Calculations"),
